@@ -1,0 +1,17 @@
+[package]
+name = "npp-rs-sys"
+version = "0.1.0"
+authors = ["Ming Yang <ymviv@qq.com>"]
+description = "Rust binding to NVIDIA Performance Primitives (NPP) APIs"
+repository = "https://github.com/vivym/npp-rs"
+readme = "README.md"
+keywords = ["npp", "cuda", "ffi"]
+license = "MIT/Apache-2.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+
+[build-dependencies]
+bindgen = "0.69.1"
