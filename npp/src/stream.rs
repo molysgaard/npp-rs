@@ -7,7 +7,7 @@ use cuda_rs::stream::CuStream;
 pub struct NppStreamContext(ffi::NppStreamContext);
 
 impl NppStreamContext {
-    pub fn default() -> NppResult<Self> {
+    pub fn try_default() -> NppResult<Self> {
         let mut stream_ctx: ffi::NppStreamContext = unsafe { std::mem::zeroed() };
         let res = unsafe {
             ffi::nppGetStreamContext(&mut stream_ctx as _)

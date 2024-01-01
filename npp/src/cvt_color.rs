@@ -13,7 +13,7 @@ pub fn convert_pixel_format(
         (PixelFormat::NV12, PixelFormat::RGB) => unsafe {
             let y_ptr = src_image.get_raw();
             let offset = src_image.pitch() * src_image.height;
-            let uv_ptr = y_ptr.offset(offset as isize);
+            let uv_ptr = y_ptr.add(offset);
             let mut src = [y_ptr, uv_ptr];
 
             match (src_image.color_space, src_image.color_range) {
