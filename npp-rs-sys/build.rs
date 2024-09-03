@@ -5,13 +5,6 @@ fn find_dir(env_key: &'static str, candidates: Vec<&'static str>) -> Option<Path
     match env::var_os(env_key) {
         Some(val) => Some(PathBuf::from(&val)),
         _ => {
-            for candidate in candidates {
-                let path = PathBuf::from(candidate);
-                if path.exists() {
-                    return Some(path);
-                }
-            }
-
             None
         }
     }
@@ -27,25 +20,25 @@ fn main() {
     println!("cargo:rustc-link-search={}/lib64", cuda_home.to_string_lossy());
 
     let libraries = vec![
-        "cudart_static",
-        "nppc_static",
-        "nppial_static",
-        "nppicc_static",
-        "nppidei_static",
-        "nppif_static",
-        "nppig_static",
-        "nppim_static",
-        "nppist_static",
-        "nppisu_static",
-        "nppitc_static",
-        "npps_static",
+        "cudart",
+        "nppc",
+        "nppial",
+        "nppicc",
+        "nppidei",
+        "nppif",
+        "nppig",
+        "nppim",
+        "nppist",
+        "nppisu",
+        "nppitc",
+        "npps",
     ];
     for library in libraries {
-        println!("cargo:rustc-link-lib=static={}", library);
+        println!("cargo:rustc-link-lib=dylib={}", library);
     }
 
-    println!("cargo:rustc-link-lib=culibos");
-    println!("cargo:rustc-link-lib=dylib=stdc++");
+    //println!("cargo:rustc-link-lib=culibos");
+    //println!("cargo:rustc-link-lib=dylib=stdc++");
 
     println!("cargo:rerun-if-changed=wrapper.h");
 
