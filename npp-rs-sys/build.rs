@@ -1,6 +1,5 @@
 use std::env;
-use std::os::linux::raw::stat;
-use std::path::PathBuf;
+use std::path::{Path, PathBuf};
 
 fn find_dir(cuda_env_vars: &[&'static str], candidates: &[&'static str]) -> Option<PathBuf> {
     let mut set_variables = std::collections::HashMap::new();
@@ -51,11 +50,7 @@ fn find_dir(cuda_env_vars: &[&'static str], candidates: &[&'static str]) -> Opti
     None
 }
 
-fn validate_and_link_npp_install(
-    cuda_home: &PathBuf,
-    npplibs: &[&str],
-    static_link: bool,
-) -> PathBuf {
+fn validate_and_link_npp_install(cuda_home: &Path, npplibs: &[&str], static_link: bool) -> PathBuf {
     let cuda_include_dir = cuda_home.join("include");
     let npp_h = cuda_include_dir.join("npp.h");
     if !npp_h.is_file() {
